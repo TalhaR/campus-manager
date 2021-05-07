@@ -25,26 +25,26 @@ const ash = require('express-async-handler');
 /** GET ALL STUDENTS: express-async-handler (ash) */
 // automatically catches any error and sends to middleware
 // same as using try/catch and calling next(error)
-router.get('/', ash(async(req, res) => {
-  let students = await Student.findAll({include: [Campus]});
+router.get('/', ash(async (req, res) => {
+  let students = await Student.findAll({ include: [Campus] });
   res.status(200).json(students);
 }));
 
 /** GET STUDENT BY ID */
-router.get('/:id', ash(async(req, res) => {
-  let student = await Student.findByPk(req.params.id, {include: [Campus]});
+router.get('/:id', ash(async (req, res) => {
+  let student = await Student.findByPk(req.params.id, { include: [Campus] });
   res.status(200).json(student);
 }));
 
 /** ADD NEW STUDENT */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   Student.create(req.body)
     .then(createdStudent => res.status(200).json(createdStudent))
     .catch(err => next(err));
 });
 
 /** DELETE STUDENT */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', function (req, res, next) {
   Student.destroy({
     where: {
       id: req.params.id
@@ -55,10 +55,9 @@ router.delete('/:id', function(req, res, next) {
 });
 
 /******************* EDIT *********************/
-
-router.put('/:id', ash(async(req, res) => {
+router.put('/:id', ash(async (req, res) => {
   await Student.update(req.body,
-        { where: {id: req.params.id} }
+    { where: { id: req.params.id } }
   );
   let student = await Student.findByPk(req.params.id);
   res.status(201).json(student);
