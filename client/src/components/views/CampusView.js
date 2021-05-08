@@ -1,3 +1,5 @@
+import { Navbar } from '../containers/Navbar'
+
 const CampusView = (props) => {
   const {campus} = props;
   //waiting for students array to be populated
@@ -5,7 +7,8 @@ const CampusView = (props) => {
   //   return <div>Loading...</div>
   // }
   return (
-    <div>      
+    <div>  
+      <Navbar />
       <h1>{campus.name}</h1>
       <p>{campus.description}</p>
       <ul>
