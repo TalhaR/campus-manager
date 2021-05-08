@@ -3,9 +3,9 @@ import { Navbar } from '../containers/Navbar'
 const CampusView = (props) => {
   const {campus} = props;
   //waiting for students array to be populated
-  // if (campus.students === undefined){
-  //   return <div>Loading...</div>
-  // }
+   if (campus.students === undefined){
+     return <div>Loading...</div>
+   }
   return (
     <div>  
       <Navbar />
