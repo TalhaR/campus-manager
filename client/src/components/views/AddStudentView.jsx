@@ -1,5 +1,4 @@
-import { React, useState } from 'react'
-import axios from 'axios';
+import PropTypes from "prop-types";
 import { Navbar } from '../containers/Navbar'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -15,42 +14,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddStudentView = () => {
+const AddStudentView = (props) => {
   const classes = useStyles();
-  const [campusName, setCampusName] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('campusName:', campusName);
-  }
-
-  const handleTest = async (e) => {
-    console.log("testing");
-    const res = await axios.get("/api/campuses/");
-    console.log(res.data);
-    console.log("done testings");
-  }
-  /*
-  await axios.post("/api/favorites", null, {
-    params: {
-      orgName: name || "",
-      orgId: ein,
-      userId: user.uid,
-      orgAddress: organization.orgAddress || "",
-      tagLine: organization.tagLine || "",
-    },
-  });
-  */
   return (
     <div>
       <Navbar />
       <Grid container justify="center">
-        <h1>New Campus Form</h1>
+        <h1>New Student Form</h1>
       </Grid>
   
-      <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form className={classes.root} noValidate autoComplete="off" onSubmit={props.handleSubmit}>
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Name" value={campusName} onInput={ e=>setCampusName(e.target.value)}/>
+          <TextField id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+        </Grid>
+
+        <Grid container justify="center">
+          <TextField id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
         </Grid>
 
         <Grid container justify="center">
@@ -58,15 +38,17 @@ const AddStudentView = () => {
             Submit
           </Button>
         </Grid>
-
-        <Grid container justify="center">
-          <Button variant="contained" color="primary" onClick={handleTest}>
-            Test Button
-          </Button>
-        </Grid>
       </form>
     </div>
   )
 }
+
+AddStudentView.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  setFirstName: PropTypes.func.isRequired,
+  setLastName: PropTypes.func.isRequired,
+};
 
 export default AddStudentView
