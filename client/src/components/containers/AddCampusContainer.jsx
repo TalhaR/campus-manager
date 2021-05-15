@@ -5,61 +5,64 @@ import { fetchAllCampusesThunk, addCampusThunk } from "../../store/thunks";
 import { AddCampusView } from "../views";
 
 class AddCampusesContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      campusName: '',
+    constructor() {
+        super();
+        this.state = {
+            campusName: "",
+        };
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const campus = {
+            name: this.state.campusName,
+            address: "No Current Address",
+        };
+        let url = window.location.href;
+        url = url.substring(0, url.lastIndexOf("/"));
+        let newCampus = await this.props.addCampusThunk(campus);
+        window.location.href = url + "/campus/" + newCampus.id;
     };
-  }
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const campus = {name: this.state.campusName, address: "No Current Address"};
-    let url = window.location.href;
-    url = url.substring(0, url.lastIndexOf('/'));
-    let newCampus =  await this.props.addCampusThunk(campus);
-    window.location.href = url + '/campus/' + newCampus.id;
-  }
+    setCampusName = (newCampusName) => {
+        this.setState({ campusName: newCampusName });
+    };
 
-  setCampusName = (newCampusName) => {
-    this.setState({campusName: newCampusName});
-  }
+    componentDidMount() {
+        console.log(this.props);
+    }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
-  render() {
-    return (
-      <AddCampusView
-        campusName={this.state.campusName}
-        handleSubmit={this.handleSubmit}
-        setCampusName={this.setCampusName}
-        handleTest={this.handleTest}
-      />
-    );
-  }
+    render() {
+        return (
+            <AddCampusView
+                campusName={this.state.campusName}
+                handleSubmit={this.handleSubmit}
+                setCampusName={this.setCampusName}
+                handleTest={this.handleTest}
+            />
+        );
+    }
 }
 
 // Map state to props;
 const mapState = (state) => {
-  return {
-    allCampuses: state.allCampuses,
-  };
+    return {
+        allCampuses: state.allCampuses,
+    };
 };
 
 // Map dispatch to props;
 const mapDispatch = (dispatch) => {
-  return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-    addCampusThunk: (campus) => dispatch(addCampusThunk(campus)),
-  };
+    return {
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+        addCampusThunk: (campus) => dispatch(addCampusThunk(campus)),
+    };
 };
 
 // Type check props;
 AddCampusesContainer.propTypes = {
-  allCampuses: PropTypes.array.isRequired,
-  fetchAllCampuses: PropTypes.func.isRequired,
+    allCampuses: PropTypes.array.isRequired,
+    fetchAllCampuses: PropTypes.func.isRequired,
 };
 
 // Export our store-connected container by default;
