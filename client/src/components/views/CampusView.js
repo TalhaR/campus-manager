@@ -17,7 +17,7 @@ const CampusView = (props) => {
     <>  
       <Navbar />
       <Container>
-        <Typography variant='h2' align='center'>{campus.name}</Typography>
+        <Typography variant='h2' align='center'>Campus Page</Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={6} align='center'>
@@ -25,6 +25,7 @@ const CampusView = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Card>
+              <Typography variant='h3' align='center'>{campus.name}</Typography>
               <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
               <Typography align='right'>
                 <Button>Edit</Button>
