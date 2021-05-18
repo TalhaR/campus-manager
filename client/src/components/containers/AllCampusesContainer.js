@@ -5,19 +5,16 @@ import { fetchAllCampusesThunk, deleteCampusThunk } from "../../store/thunks";
 import { AllCampusesView } from "../views";
 
 class AllCampusesContainer extends Component {
+
   componentDidMount() {
     console.log(this.props);
     this.props.fetchAllCampuses();
-  }
+  };
 
-  handleClick = async (id) => {
-    console.log(id);
-    // let url = window.location.href;
-    // url = url.substring(0, url.lastIndexOf("/"));
-    // let newStudent = await this.props.addStudentThunk(student);
-    // window.location.href = url + "/student/" + newStudent.id;
-    // console.log(this.state.firstName, this.state.lastName);
-};
+  // handleDelete = async (id) => {
+  //   console.log(id);
+  //   this.props.deleteCampusThunk(id);
+  // };
 
   render() {
     return (

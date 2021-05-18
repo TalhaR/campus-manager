@@ -33,8 +33,8 @@ const AllCampusesView = (props) => {
           </Typography>
           <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
           <Typography align='right'>
-            <Button>edit</Button>
-            <Button onClick={deleteCampusThunk(campus.id)}>delete</Button>
+            <Button>Edit</Button>
+            <Button onClick={deleteCampusThunk(campus.id)}>Delete</Button>
           </Typography>
         </Card>
         </Grid>
