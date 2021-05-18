@@ -10,12 +10,6 @@ class AllCampusesContainer extends Component {
     this.props.fetchAllCampuses();
   }
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('delete')
-
-};
-
   render() {
     return (
       <AllCampusesView
