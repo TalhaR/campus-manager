@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Navbar } from '../containers/Navbar'
 import { Container, Typography, Card, Button, Grid} from '@material-ui/core/'
+// import { deleteCampusThunk } from "../../store/thunks";
 
 const AllCampusesView = (props) => {
   if (!props.allCampuses.length) {
@@ -20,16 +21,18 @@ const AllCampusesView = (props) => {
       
       
       {props.allCampuses.map((campus) => (
-        <Grid item xs={6}>
-        <Card variant="outlined" key={campus.id}>
-          <img src={campus.imageURL} alt="campus image"></img>
+        <Grid item xs={6} key={campus.id}>
+        <Card variant="outlined">
+          <img src={campus.imageURL} alt={"campus " + campus.id}></img>
           <Typography variant='h4' align='center'>
             <Link to={`/campus/${campus.id}`}>{campus.name}</Link>
           </Typography>
           <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
           <Typography align='right'>
             <Button>edit</Button>
-            <Button>delete</Button>
+            <Button onClick={() => {
+              // deleteCampusThunk(campus.id)
+            }}>delete</Button>
           </Typography>
         </Card>
         </Grid>
