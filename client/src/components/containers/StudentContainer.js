@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchStudentThunk } from "../../store/thunks";
 
 import { StudentView } from "../views";
+import { Navbar } from "./Navbar";
 
 class StudentContainer extends Component {
   componentDidMount() {
@@ -12,9 +13,12 @@ class StudentContainer extends Component {
 
   render() {
     return (
-      <StudentView 
-        student={this.props.student}
-      />
+      <>
+        <Navbar />
+        <StudentView 
+          student={this.props.student}
+        />
+      </>
     );
   }
 }
