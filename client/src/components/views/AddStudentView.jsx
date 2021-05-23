@@ -34,6 +34,10 @@ const AddStudentView = (props) => {
         </Grid>
 
         <Grid container justify="center">
+          <TextField id="standard-basic" label="Email" value={props.email} onInput={ e=>props.setEmail(e.target.value)}/>
+        </Grid>
+
+        <Grid container justify="center">
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
@@ -46,9 +50,11 @@ const AddStudentView = (props) => {
 AddStudentView.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
   setFirstName: PropTypes.func.isRequired,
+  lastName: PropTypes.string.isRequired,
   setLastName: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
 };
 
 export default AddStudentView

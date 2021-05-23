@@ -9,6 +9,7 @@ class AddCampusesContainer extends Component {
         super();
         this.state = {
             campusName: "",
+            campusAddress: "",
         };
     }
 
@@ -16,7 +17,7 @@ class AddCampusesContainer extends Component {
         e.preventDefault();
         const campus = {
             name: this.state.campusName,
-            address: "No Current Address",
+            address: this.state.campusAddress,
         };
         let url = window.location.href;
         url = url.substring(0, url.lastIndexOf("/"));
@@ -28,6 +29,10 @@ class AddCampusesContainer extends Component {
         this.setState({ campusName: newCampusName });
     };
 
+    setCampusAddress = (newCampusAddress) => {
+      this.setState({ campusAddress: newCampusAddress });
+    };
+
     componentDidMount() {
         console.log(this.props);
     }
@@ -35,10 +40,11 @@ class AddCampusesContainer extends Component {
     render() {
         return (
             <AddCampusView
-                campusName={this.state.campusName}
                 handleSubmit={this.handleSubmit}
+                campusName={this.state.campusName}
                 setCampusName={this.setCampusName}
-                handleTest={this.handleTest}
+                campusAddress={this.state.campusAddress}
+                setCampusAddress={this.setCampusAddress}
             />
         );
     }

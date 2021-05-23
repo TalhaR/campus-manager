@@ -30,6 +30,10 @@ const AddCampusView = (props) => {
         </Grid>
 
         <Grid container justify="center">
+          <TextField id="standard-basic" label="Campus Address" value={props.campusAddress} onInput={ e=>props.setCampusAddress(e.target.value)}/>
+        </Grid>
+
+        <Grid container justify="center">
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
@@ -43,6 +47,8 @@ AddCampusView.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   campusName: PropTypes.string.isRequired,
   setCampusName: PropTypes.func.isRequired,
+  campusAddress: PropTypes.string.isRequired,
+  setCampusAddress: PropTypes.func.isRequired,
 };
 
 export default AddCampusView

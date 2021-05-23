@@ -10,6 +10,7 @@ class AddStudentContainer extends Component {
         this.state = {
             firstName: "",
             lastName: "",
+            email: "",
         };
     }
 
@@ -18,8 +19,7 @@ class AddStudentContainer extends Component {
         const student = {
             firstname: this.state.firstName,
             lastname: this.state.lastName,
-            email: "noemail@gmail.com",
-            campus: { name: "Hunter College" },
+            email: this.state.email,
         };
         console.log(student);
         let url = window.location.href;
@@ -33,8 +33,12 @@ class AddStudentContainer extends Component {
         this.setState({ firstName: newFirstName });
     };
 
+    setEmail = (newEmail) => {
+        this.setState({ email: newEmail });
+    };
+
     setLastName = (newLastName) => {
-        this.setState({ lastName: newLastName });
+      this.setState({ lastName: newLastName });
     };
 
     componentDidMount() {
@@ -44,11 +48,13 @@ class AddStudentContainer extends Component {
     render() {
         return (
             <AddStudentView
-                firstName={this.state.firstName}
-                lastName={this.state.lastName}
                 handleSubmit={this.handleSubmit}
+                firstName={this.state.firstName}
                 setFirstName={this.setFirstName}
+                lastName={this.state.lastName}
                 setLastName={this.setLastName}
+                email={this.state.email}
+                setEmail={this.setEmail}
             />
         );
     }
