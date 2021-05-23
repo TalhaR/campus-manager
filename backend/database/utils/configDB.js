@@ -1,6 +1,6 @@
 const dbName = 'starter-server';
-const dbUser = 'talha';
-const dbPwd = '1234';
+const dbUser = 'aamershikari';
+const dbPwd = '234';
 
 module.exports = {
   dbName,

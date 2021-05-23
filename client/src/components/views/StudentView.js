@@ -2,6 +2,7 @@ import { Container, Typography, Card, Button, Grid } from '@material-ui/core/'
 import { useEffect } from 'react';
 // import { Select, FormControl, InputLabel, MenuItem } from '@material-ui/core/'
 import { deleteStudentThunk } from "../../store/thunks";
+import { Link } from "react-router-dom";
 
 
 const StudentView = ({ student }) => {
@@ -38,7 +39,9 @@ const StudentView = ({ student }) => {
             <Typography variant='h3' align='center'>{student.firstname} {student.lastname}</Typography>
             <Typography variant='subtitle1' align='center'>{"GPA: " + student.gpa}</Typography>
             <Typography align='right'>
-              <Button>Edit</Button>
+              <Button variant="contained" color="primary" component={Link} to={`/editstudent`}>
+                Edit
+              </Button>
               <Button onClick={deleteStudentThunk(student.id)}>Delete</Button>
             </Typography>
           </Card>
