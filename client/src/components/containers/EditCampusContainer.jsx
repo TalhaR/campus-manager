@@ -6,19 +6,17 @@ import { EditCampusView } from "../views";
 import { fetchCampusThunk } from "../../store/thunks";
 
 class EditCampusContainer extends Component {
-        /* 
     componentDidMount() {
-        //getting campus ID from url
+        //getting campus ID from imageUrl
         this.props.fetchCampus(this.props.match.params.id);
-      }
-      */
+    }
     
     constructor() {
         super();
         this.state = {
             name: "",
-            location: "",
-            url: "",
+            address: "",
+            imageUrl: "",
             description: ""
         };
     }
@@ -26,50 +24,50 @@ class EditCampusContainer extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         const campus = {
+            id: this.props.match.params.id,
             name: this.state.name,
-            location: this.state.location,
-            url: this.state.url,
+            address: this.state.address,
             description: this.state.description
         };
+        if (this.state.imageUrl !== "") { 
+            campus.imageUrl = this.state.imageUrl;
+        }
         console.log(campus);
         let web = window.location.href;
-        web = web.substring(0, web.lastIndexOf("/"));
+        web = web.substring(0, web.indexOf("/"));
         let newCampus = await this.props.editCampusThunk(campus);
-        console.log("Here is New Student***")
-        window.location.href = web + "/campus";
+        window.location.href = web + "/campus/" + this.props.match.params.id;
     };
 
     setName = (newName) => {
-        this.setState({ firstName: newName });
+        this.setState({ name: newName });
     };
 
-    setLocation = (newLocation) => {
-        this.setState({ lastName: newLocation });
+    setAddress = (newAddress) => {
+        this.setState({ address: newAddress });
     };
 
-    setURL = (newURL) => {
-        this.setState({ url: newURL});
+    setImageUrl = (newImageUrl) => {
+        this.setState({ imageUrl: newImageUrl});
     };
 
     setDescription = (newDescription) => {
-        this.setState({ gpa: newDescription});
+        this.setState({ description: newDescription});
     };
-
-
 
     render() {
         return (
             <EditCampusView
                 name={this.state.name}
-                location={this.state.location}
-                url={this.state.url}
+                address={this.state.address}
+                imageUrl={this.state.imageUrl}
                 descripition={this.state.description}
                 handleSubmit={this.handleSubmit}
                 setName={this.setName}
-                setLocation={this.setLocation}
-                setURL={this.setURL}
+                setAddress={this.setAddress}
+                setImageUrl={this.setImageUrl}
                 setDescription={this.setDescription}
-                campus = {this.props.fetchCampus(this.props.match.params.id)}
+                //campus = {this.props.fetchCampus(this.props.match.params.id)}
             />
         );
     }

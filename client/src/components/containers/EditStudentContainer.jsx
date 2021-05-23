@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editStudentThunk } from "../../store/thunks";
 import { EditStudentView } from "../views";
-
+import { fetchStudentThunk } from "../../store/thunks";
 
 
 class EditStudentContainer extends Component {
+
+    componentDidMount() {
+        //getting campus ID from imageUrl
+        this.props.fetchStudent(this.props.match.params.id);
+    };
+
 
     constructor() {
         super();
@@ -14,25 +20,30 @@ class EditStudentContainer extends Component {
             firstName: "",
             lastName: "",
             gpa: "",
-            url: "",
+            imageUrl: "",
         };
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
         const student = {
+            id: this.props.match.params.id,
             firstname: this.state.firstName,
             lastname: this.state.lastName,
             gpa: this.state.gpa,
-            url: this.state.url
+            
         };
+        if (this.state.imageUrl !== "") { 
+            student.imageUrl = this.state.imageUrl;
+        }
         console.log(student);
         let web = window.location.href;
-        web = web.substring(0, web.lastIndexOf("/"));
+        web = web.substring(0, web.indexOf("/"));
         let newStudent = await this.props.editStudentThunk(student);
         console.log("Here is New Student***")
         console.log(newStudent);
-        window.location.href = web + "/students";
+        window.location.href = web + "/student/" + this.props.match.params.id;
+        
     };
 
     setFirstName = (newFirstName) => {
@@ -47,8 +58,8 @@ class EditStudentContainer extends Component {
         this.setState({ gpa: newGPA});
     };
 
-    setURL = (newURL) => {
-        this.setState({ url: newURL});
+    setimageUrl = (newimageUrl) => {
+        this.setState({ imageUrl: newimageUrl});
     };
 
     render() {
@@ -57,12 +68,12 @@ class EditStudentContainer extends Component {
                 firstName={this.state.firstName}
                 lastName={this.state.lastName}
                 gpa={this.state.gpa}
-                url={this.state.url}
+                imageUrl={this.state.imageUrl}
                 handleSubmit={this.handleSubmit}
                 setFirstName={this.setFirstName}
                 setLastName={this.setLastName}
                 setGPA={this.setGPA}
-                setURL={this.setURL}
+                setimageUrl={this.setimageUrl}
                 
             />
         );
@@ -78,6 +89,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
     return {
         editStudentThunk: (student) => dispatch(editStudentThunk(student)),
+        fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
     };
 };
 

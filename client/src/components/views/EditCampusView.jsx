@@ -30,15 +30,15 @@ const EditCampusView = (props) => {
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Location" value={props.location} onInput={ e=>props.setLocation(e.target.value)}/>
+          <TextField id="standard-basic" label="Campus address" value={props.address} onInput={ e=>props.setAddress(e.target.value)}/>
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Image URL" value={props.url} onInput={ e=>props.setURL(e.target.value)}/>
+          <TextField id="standard-basic" label="Campus Image URL" value={props.imageUrl} onInput={ e=>props.setImageUrl(e.target.value)}/>
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-multiline-flexible" label="Campus Description" multiline rowsMax={7} value={props.description} onInput={ e=>props.setDescription(e.target.value)}/>
+          <TextField id="standard-basic" label="Campus Description" value={props.description} onInput={ e=>props.setDescription(e.target.value)}/>
         </Grid>
 
         <Grid container justify="center">
@@ -49,7 +49,7 @@ const EditCampusView = (props) => {
 
 
 
-        <Typography variant='h4' align='left'>Students on Campus</Typography>
+        {/* <Typography variant='h4' align='left'>Students on Campus</Typography>
 
         <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -70,7 +70,7 @@ const EditCampusView = (props) => {
                 );
                 })}
             </Grid>
-        </Grid>
+        </Grid> */}
       </form>
     </div>
   )
@@ -79,12 +79,12 @@ const EditCampusView = (props) => {
 EditCampusView.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   setName: PropTypes.func.isRequired,
-  setLocation: PropTypes.func.isRequired,
-  setURL: PropTypes.func.isRequired,
+  setAddress: PropTypes.func.isRequired,
+  setImageUrl: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
 };
 

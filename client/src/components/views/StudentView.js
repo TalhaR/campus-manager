@@ -39,7 +39,7 @@ const StudentView = ({ student }) => {
             <Typography variant='h3' align='center'>{student.firstname} {student.lastname}</Typography>
             <Typography variant='subtitle1' align='center'>{"GPA: " + student.gpa}</Typography>
             <Typography align='right'>
-              <Button variant="contained" color="primary" component={Link} to={`/editstudent`}>
+              <Button variant="contained" color="primary" component={Link} to={`/editstudent/${student.id}`}>
                 Edit
               </Button>
               <Button onClick={deleteStudentThunk(student.id)}>Delete</Button>

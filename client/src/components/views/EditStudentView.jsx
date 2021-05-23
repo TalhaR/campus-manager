@@ -38,7 +38,7 @@ const EditStudentView = (props) => {
           </Grid>
 
           <Grid container justify="center">
-            <TextField id="standard-basic" label="Student URL" value={props.url} onInput={ e=>props.setURL(e.target.value)}/>
+            <TextField id="standard-basic" label="Student URL" value={props.imageUrl} onInput={ e=>props.setimageUrl(e.target.value)}/>
           </Grid>
   
           <Grid container justify="center">
@@ -56,11 +56,11 @@ const EditStudentView = (props) => {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     gpa: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
     setFirstName: PropTypes.func.isRequired,
     setLastName: PropTypes.func.isRequired,
     setGPA: PropTypes.func.isRequired,
-    setURL: PropTypes.func.isRequired
+    setimageUrl: PropTypes.func.isRequired
   };
 
 export default EditStudentView
