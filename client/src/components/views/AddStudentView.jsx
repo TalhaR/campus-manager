@@ -26,15 +26,30 @@ const AddStudentView = (props) => {
   
       <form className={classes.root} noValidate autoComplete="off" onSubmit={props.handleSubmit}>
         <Grid container justify="center">
-          <TextField id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+          {
+            "firstName" in props.errors ?
+            <TextField error helperText={props.errors.firstName} id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
+          {
+            "lastName" in props.errors ?
+            <TextField error helperText={props.errors.lastName} id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Email" value={props.email} onInput={ e=>props.setEmail(e.target.value)}/>
+          {
+            "email" in props.errors ?
+            <TextField error helperText={props.errors.email} id="standard-basic" label="Email" value={props.email} onInput={ e=>props.setEmail(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Email" value={props.email} onInput={ e=>props.setEmail(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
@@ -55,6 +70,7 @@ AddStudentView.propTypes = {
   setLastName: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   setEmail: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 export default AddStudentView

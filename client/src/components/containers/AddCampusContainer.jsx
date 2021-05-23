@@ -10,32 +10,62 @@ class AddCampusesContainer extends Component {
         this.state = {
             campusName: "",
             campusAddress: "",
+            errors: {},
+            hasSubmitted: false,
         };
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        const campus = {
-            name: this.state.campusName,
-            address: this.state.campusAddress,
-        };
-        let url = window.location.href;
-        url = url.substring(0, url.lastIndexOf("/"));
-        let newCampus = await this.props.addCampusThunk(campus);
-        window.location.href = url + "/campus/" + newCampus.id;
+        this.setState({ hasSubmitted: true });
+        const newErrors = this.findFormErrors();
+        if (Object.keys(newErrors).length > 0) {
+          // We got errors!
+          this.setErrors(newErrors);
+        }
+        else {
+          // No errors! Put any logic here for the form submission!
+          const campus = {
+              name: this.state.campusName,
+              address: this.state.campusAddress,
+          };
+          let url = window.location.href;
+          url = url.substring(0, url.lastIndexOf("/"));
+          let newCampus = await this.props.addCampusThunk(campus);
+          window.location.href = url + "/campus/" + newCampus.id;
+        }
     };
 
     setCampusName = (newCampusName) => {
-        this.setState({ campusName: newCampusName });
+        this.setState({ campusName: newCampusName }, this.findErrorOnChange);
     };
 
     setCampusAddress = (newCampusAddress) => {
-      this.setState({ campusAddress: newCampusAddress });
+      this.setState({ campusAddress: newCampusAddress }, this.findErrorOnChange);
     };
 
-    componentDidMount() {
-        console.log(this.props);
+    findErrorOnChange = () => {
+      if (this.state.hasSubmitted) {
+        const newErrors = this.findFormErrors();
+        this.setErrors(newErrors);
+      }
     }
+
+    setErrors = (newErrors) => {
+      this.setState({ errors: newErrors });
+    };
+
+    // finds form errors
+    findFormErrors = () => {
+      const { campusName, campusAddress } = this.state;
+      const newErrors = {};
+      // campusName errors
+      if (!campusName) newErrors.campusName = "cannot be blank!";
+      // campusAddress errors
+      if (!campusAddress) newErrors.campusAddress = "cannot be blank!";
+
+      return newErrors;
+    };
 
     render() {
         return (
@@ -45,6 +75,7 @@ class AddCampusesContainer extends Component {
                 setCampusName={this.setCampusName}
                 campusAddress={this.state.campusAddress}
                 setCampusAddress={this.setCampusAddress}
+                errors={this.state.errors}
             />
         );
     }

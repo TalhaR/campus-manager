@@ -26,11 +26,21 @@ const AddCampusView = (props) => {
   
       <form className={classes.root} noValidate autoComplete="off" onSubmit={props.handleSubmit}>
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Name" value={props.campusName} onInput={ e=>props.setCampusName(e.target.value)}/>
+          {
+            "campusName" in props.errors ?
+            <TextField error helperText={props.errors.campusName} id="standard-basic" label="Campus Name" value={props.campusName} onInput={ e=>props.setCampusName(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Name" value={props.campusName} onInput={ e=>props.setCampusName(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Address" value={props.campusAddress} onInput={ e=>props.setCampusAddress(e.target.value)}/>
+          {
+            "campusAddress" in props.errors ?
+            <TextField error helperText={props.errors.campusAddress} id="standard-basic" label="Campus Address" value={props.campusAddress} onInput={ e=>props.setCampusAddress(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Address" value={props.campusAddress} onInput={ e=>props.setCampusAddress(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
