@@ -1,11 +1,14 @@
 import { Container, Typography, Card, Button, Grid } from '@material-ui/core/'
-import { useEffect } from 'react';
-// import { Select, FormControl, InputLabel, MenuItem } from '@material-ui/core/'
+import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Select, FormGroup, MenuItem } from '@material-ui/core/'
 import { deleteStudentThunk } from "../../store/thunks";
+import axios from "axios";
 
 
-const StudentView = ({ student }) => {
-  
+const StudentView = ({ student, allCampuses }) => {
+  const [newCampus, setNewCampus] = useState(null);
+
   useEffect(() => {
     console.log(student);
   }, [student])
@@ -19,12 +22,19 @@ const StudentView = ({ student }) => {
     return <div>Loading...</div>
   };
 
-  // const handleChange = (e) => {
-  //   console.log(e)
-  // }
-  // const handleSubmit = (e) => {
-  //   console.log(e);
-  // }
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setNewCampus(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    console.log(e.target.value)
+    e.preventDefault();
+    if (newCampus)
+      axios
+        .put(`/api/students/${student.id}`, { campusId: newCampus })
+        .then(() => e.target.submit());
+  };
 
   return (
     <Container>
@@ -54,31 +64,31 @@ const StudentView = ({ student }) => {
               <Typography variant='subtitle1' align='left'>This student is registered to a campus</Typography>
               <Card> 
                 <img src={student.campus.imageUrl} alt="campus" style={{width: "100%"}} />
-                <Typography align='center'>{student.campus.name}</Typography>
+                <Typography align='center'><Link to={`/campus/${student.campus.id}`}>{student.campus.name}</Link></Typography>
                 <br/>
               </Card>
             </Grid>
 
-            {/* <Grid item xs={6}>
-              <FormControl noValidate onSubmit={handleSubmit}>
+            <Grid item xs={6}>
+              <form onSubmit={handleSubmit}>
               <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                value={student.campus.name}
+
+                defaultValue=""
                 onChange={handleChange}
               >
-                <MenuItem value="">
+                <MenuItem value="" disabled hidden>
                   <em>None</em>
                 </MenuItem>
-                {props.allCampuses.map((campus) => (
-                  <MenuItem value={campus.name}>
-                    <em>campus.name</em>
-                  </MenuItem>
+                {allCampuses.length && 
+                  allCampuses.map((campus) => (
+                    <MenuItem key={campus.id} value={campus.id}>
+                      <em>{campus.name}</em>
+                    </MenuItem>
                 ))}
               </Select>
-                <Button value="Select Campus...">Change Campus</Button>
-              </FormControl>
-              </Grid> */}
+              <Button type="submit" value="Select Campus...">Change Campus</Button>
+              </form>
+              </Grid>
           </>
         )}
       </Grid>
