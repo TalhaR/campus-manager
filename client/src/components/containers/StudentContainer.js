@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudentThunk } from "../../store/thunks";
+import { fetchAllCampusesThunk, fetchStudentThunk } from "../../store/thunks";
 
 import { StudentView } from "../views";
 import { Navbar } from "./Navbar";
@@ -8,6 +8,7 @@ import { Navbar } from "./Navbar";
 class StudentContainer extends Component {
   componentDidMount() {
     //getting campus ID from url
+    this.props.fetchAllCampuses();
     this.props.fetchStudent(this.props.match.params.id);
   }
 
@@ -17,6 +18,7 @@ class StudentContainer extends Component {
         <Navbar />
         <StudentView 
           student={this.props.student}
+          allCampuses={this.props.allCampuses}
         />
       </>
     );
@@ -26,6 +28,7 @@ class StudentContainer extends Component {
 // map state to props
 const mapState = (state) => {
   return {
+    allCampuses: state.allCampuses,
     student: state.student,
   };
 };
@@ -33,6 +36,7 @@ const mapState = (state) => {
 // map dispatch to props
 const mapDispatch = (dispatch) => {
   return {
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
   };
 };
