@@ -34,7 +34,9 @@ const AllCampusesView = (props) => {
                     </Typography>
                     <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
                     <Typography align='right'>
-                      <Button>Edit</Button>
+                      <Button variant="contained" color="primary" component={Link} to={`/editcampus/${campus.id}`}>
+                        Edit
+                      </Button>
                       <Button onClick={deleteCampusThunk(campus.id)}>Delete</Button>
                     </Typography>
                   </Card>
