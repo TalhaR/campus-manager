@@ -6,7 +6,13 @@ const HomePageView = () => {
   return (
     <div>
       <Navbar />
-      <h1>Home Page</h1>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <h1>Home Page</h1>
+        
+      </div>
+      <center>
+      <h2>Campus Manager App</h2>
+      </center>
     </div>
   );    
 }

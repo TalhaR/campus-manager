@@ -11,15 +11,11 @@ class AllCampusesContainer extends Component {
     this.props.fetchAllCampuses();
   };
 
-  // handleDelete = async (id) => {
-  //   console.log(id);
-  //   this.props.deleteCampusThunk(id);
-  // };
-
   render() {
     return (
       <AllCampusesView
         allCampuses={this.props.allCampuses}
+        deleteCampus={this.props.deleteCampus}
       />
     );
   }
@@ -36,7 +32,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-    deleteCampusThunk: (campus) => dispatch(deleteCampusThunk(campus)),
+    deleteCampus: (campus) => dispatch(deleteCampusThunk(campus)),
   };
 };
 

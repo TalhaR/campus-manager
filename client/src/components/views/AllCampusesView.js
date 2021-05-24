@@ -2,10 +2,20 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Navbar } from '../containers/Navbar'
 import { Container, Typography, Card, Button, Grid } from '@material-ui/core/'
-import { deleteCampusThunk } from "../../store/thunks";
+import { useEffect, useState } from "react";
 
 
 const AllCampusesView = (props) => {
+  const [campuses, setCampuses] = useState([])
+
+  useEffect(() => {
+    setCampuses(props.allCampuses)
+  }, [props.allCampuses])
+
+  const handleDelete = (id) => {
+    props.deleteCampus(id)
+    setCampuses(() => campuses.filter(elem => elem.id !== id))
+  }
 
   return (
     <>
@@ -25,7 +35,7 @@ const AllCampusesView = (props) => {
           <>
             <Grid container spacing={3}>
             
-              {props.allCampuses.map((campus) => (
+              {campuses.map((campus) => (
                 <Grid item xs={6} key={campus.id}>
                   <Card variant="outlined">
                     <img src={campus.imageUrl} alt={campus.name + " img"} style={{ width: "100%" }} />
@@ -34,10 +44,10 @@ const AllCampusesView = (props) => {
                     </Typography>
                     <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
                     <Typography align='right'>
-                      <Button variant="contained" color="primary" component={Link} to={`/editcampus/${campus.id}`}>
+                      <Button variant="contained" component={Link} to={`/editcampus/${campus.id}`}>
                         Edit
                       </Button>
-                      <Button onClick={deleteCampusThunk(campus.id)}>Delete</Button>
+                      <Button variant="contained" onClick={() => handleDelete(campus.id) }>Delete</Button>
                     </Typography>
                   </Card>
                 </Grid>

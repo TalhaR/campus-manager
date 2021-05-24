@@ -1,17 +1,12 @@
 import { Container, Typography, Card, Button, Grid } from '@material-ui/core/'
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Select, MenuItem } from '@material-ui/core/'
-import { deleteStudentThunk } from "../../store/thunks";
 import axios from "axios";
 
 
-const StudentView = ({ student, allCampuses }) => {
+const StudentView = ({ student, allCampuses, deleteStudent }) => {
   const [newCampus, setNewCampus] = useState(null);
-
-  useEffect(() => {
-    console.log(student);
-  }, [student])
 
   if (student === null) {
     return <Typography variant='h2' align='center'>No such student exists!</Typography>
@@ -36,6 +31,11 @@ const StudentView = ({ student, allCampuses }) => {
         .then(() => e.target.submit());
   };
 
+  const handleDelete = (id) => {
+    deleteStudent(id)
+
+  }
+
   return (
     <Container>
       <Typography variant='h2' align='center'>Student Page</Typography>
@@ -52,7 +52,7 @@ const StudentView = ({ student, allCampuses }) => {
               <Button variant="contained" color="primary" component={Link} to={`/editstudent/${student.id}`}>
                 Edit
               </Button>
-              <Button onClick={deleteStudentThunk(student.id)}>Delete</Button>
+              <Button onClick={() => handleDelete(student.id)}>Delete</Button>
             </Typography>
           </Card>
         </Grid>
