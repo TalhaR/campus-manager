@@ -1,7 +1,7 @@
 import { Container, Typography, Card, Button, Grid } from '@material-ui/core/'
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { Select, FormGroup, MenuItem } from '@material-ui/core/'
+import { Select, MenuItem } from '@material-ui/core/'
 import { deleteStudentThunk } from "../../store/thunks";
 import axios from "axios";
 

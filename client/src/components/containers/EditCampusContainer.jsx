@@ -4,11 +4,20 @@ import { connect } from "react-redux";
 import { editCampusThunk } from "../../store/thunks";
 import { EditCampusView } from "../views";
 import { fetchCampusThunk } from "../../store/thunks";
+import { fetchAllStudentsThunk } from "../../store/thunks";
+import { editStudentThunk } from "../../store/thunks";
 
 class EditCampusContainer extends Component {
     componentDidMount() {
         //getting campus ID from imageUrl
         this.props.fetchCampus(this.props.match.params.id);
+        this.props.fetchAllStudents();
+        
+    }
+
+    componentDidUpdate() { 
+        console.log(this.props);
+        
     }
     
     constructor() {
@@ -21,6 +30,19 @@ class EditCampusContainer extends Component {
             errors: {},
             hasSubmitted: false,
         };
+        
+    }
+
+    handleAddSubmit = async (e) => {
+        e.preventDefault();
+
+        // this.setState({ hasSubmitted: true });
+
+        const student = {
+            campus: this.props.match.params.id,
+        }
+        await this.props.editStudentThunk(student);
+
     }
 
     handleSubmit = async (e) => {
@@ -45,7 +67,7 @@ class EditCampusContainer extends Component {
             console.log(campus);
             let web = window.location.href;
             web = web.substring(0, web.indexOf("/"));
-            let newCampus = await this.props.editCampusThunk(campus);
+            await this.props.editCampusThunk(campus);
             window.location.href = web + "/campus/" + this.props.match.params.id;
         }
     };
@@ -112,14 +134,16 @@ class EditCampusContainer extends Component {
                 name={this.state.name}
                 address={this.state.address}
                 imageUrl={this.state.imageUrl}
-                descripition={this.state.description}
+                description={this.state.description}
                 handleSubmit={this.handleSubmit}
                 setName={this.setName}
                 setAddress={this.setAddress}
                 setImageUrl={this.setImageUrl}
                 setDescription={this.setDescription}
-                //campus = {this.props.fetchCampus(this.props.match.params.id)}
+                campus={this.props.campus}
+                students={this.props.students}
                 errors={this.state.errors}
+                handleAddSubmit={this.handleAddSubmit}
             />
         );
     }
@@ -127,7 +151,10 @@ class EditCampusContainer extends Component {
 
 // Map state to props;
 const mapState = (state) => {
-    return {};
+    return {
+        campus: state.campus,
+        students: state.allStudents,
+    };
 };
 
 // Map dispatch to props;
@@ -135,6 +162,8 @@ const mapDispatch = (dispatch) => {
     return {
         editCampusThunk: (student) => dispatch(editCampusThunk(student)),
         fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
+        fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+        editStudentThunk: (student) => dispatch(editStudentThunk(student)),
     };
 };
 
