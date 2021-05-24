@@ -50,7 +50,7 @@ const StudentView = ({ student, allCampuses, deleteStudent }) => {
             <Typography variant='subtitle1' align='center'>{"Email: " + student.email}</Typography>
             <Typography variant='subtitle1' align='center'>{"GPA: " + student.gpa}</Typography>
             <Typography align='right'>
-              <Button variant="contained" color="primary" component={Link} to={`/editstudent/${student.id}`}>
+              <Button component={Link} to={`/editstudent/${student.id}`}>
                 Edit
               </Button>
               <Button onClick={() => handleDelete(student.id)}>Delete</Button>

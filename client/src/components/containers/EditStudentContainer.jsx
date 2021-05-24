@@ -1,7 +1,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { editStudentThunk } from "../../store/thunks";
+import { editStudentThunk, fetchAllCampusesThunk } from "../../store/thunks";
 import { EditStudentView } from "../views";
 import { fetchStudentThunk } from "../../store/thunks";
 
@@ -11,6 +11,7 @@ class EditStudentContainer extends Component {
     componentDidMount() {
         //getting campus ID from imageUrl
         this.props.fetchStudent(this.props.match.params.id);
+        this.props.fetchAllCampuses()
     };
 
     constructor() {
@@ -149,6 +150,8 @@ class EditStudentContainer extends Component {
                 setGPA={this.setGPA}
                 setimageUrl={this.setimageUrl}
                 errors={this.state.errors}
+                allCampuses={this.props.allCampuses}
+                studentId={this.props.match.params.id}
             />
         );
     }
@@ -156,7 +159,9 @@ class EditStudentContainer extends Component {
 
 // Map state to props;
 const mapState = (state) => {
-    return {};
+    return {
+      allCampuses: state.allCampuses
+    };
 };
 
 // Map dispatch to props;
@@ -164,6 +169,7 @@ const mapDispatch = (dispatch) => {
     return {
         editStudentThunk: (student) => dispatch(editStudentThunk(student)),
         fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     };
 };
 

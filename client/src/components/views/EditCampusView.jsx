@@ -38,7 +38,6 @@ const EditCampusView = (props) => {
                 .put(`/api/students/${studentId}`, {
                     campusId: props.campus.id,
                 })
-                .then((e) => console.log(e));
     };
 
     return (

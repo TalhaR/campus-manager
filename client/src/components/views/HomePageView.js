@@ -2,7 +2,6 @@ import { Navbar } from '../containers/Navbar'
 
 
 const HomePageView = () => {
-  //const classes = useStyles();
   return (
     <div>
       <Navbar />

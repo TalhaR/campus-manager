@@ -29,7 +29,7 @@ const AllCampusesView = (props) => {
 
         {!props.allCampuses.length ? (
           <>
-            <Typography variant='h4' align='center'>There are no campuses.</Typography>
+            <Typography variant='h4' align='center'>There are currently no Campuses</Typography>
           </>
         ) : (
           <>

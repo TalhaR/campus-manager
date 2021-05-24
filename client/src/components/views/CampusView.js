@@ -30,8 +30,8 @@ const CampusView = ({ campus, deleteCampus }) => {
         <Grid item xs={8}>
           <Card>
             <Typography variant='h3' align='center'>{campus.name}</Typography>
-            <Typography variant='subtitle1' align='center'>{campus.address}</Typography>
-            <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
+            <Typography variant='subtitle1' align='center'>{`Address: ${campus.address}`}</Typography>
+            <Typography variant='subtitle1' align='center'>{`Description: ${campus.description}`}</Typography>
             <Typography align='right'>
               <Button component={Link} to={`/editcampus/${campus.id}`}>
                 Edit
@@ -46,7 +46,7 @@ const CampusView = ({ campus, deleteCampus }) => {
       <Typography variant='h4' align='left'>Students on Campus</Typography>
 
       <Grid container spacing={3}>
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           {campus.students.length === 0 ? <h1> No students registered to this campus </h1> :
           campus.students.map(student => {
             let name = student.firstname + " " + student.lastname;
@@ -55,7 +55,7 @@ const CampusView = ({ campus, deleteCampus }) => {
                 <img align='center' src={student.imageUrl} alt={name} style={{width: "100%"}} />
                 <Typography variant='subtitle1' align='center'>
                   <Link to={`/student/${student.id}`}>
-                    {name}
+                   {name}
                   </Link>
                 </Typography>
                 <Typography variant='subtitle2' align='center'>
