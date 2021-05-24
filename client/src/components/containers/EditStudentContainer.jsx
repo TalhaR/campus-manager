@@ -44,12 +44,9 @@ class EditStudentContainer extends Component {
           if (this.state.imageUrl !== "") { 
               student.imageUrl = this.state.imageUrl;
           }
-          console.log(student);
           let web = window.location.href;
           web = web.substring(0, web.indexOf("/"));
-          let newStudent = await this.props.editStudentThunk(student);
-          console.log("Here is New Student***")
-          console.log(newStudent);
+          await this.props.editStudentThunk(student);
           window.location.href = web + "/student/" + this.props.match.params.id;
         }
         
@@ -94,7 +91,6 @@ class EditStudentContainer extends Component {
     }
 
     validGPA = (str) => {
-      console.log(parseFloat(str));
       //checking that there are only numbers and up to one .
       let numDots = 0;
       for (let i = 0; i < str.le; i++) {

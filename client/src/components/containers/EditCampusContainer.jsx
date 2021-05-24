@@ -12,12 +12,6 @@ class EditCampusContainer extends Component {
         //getting campus ID from imageUrl
         this.props.fetchCampus(this.props.match.params.id);
         this.props.fetchAllStudents();
-        
-    }
-
-    componentDidUpdate() { 
-        console.log(this.props);
-        
     }
     
     constructor() {
@@ -64,7 +58,6 @@ class EditCampusContainer extends Component {
             if (this.state.imageUrl !== "") { 
                 campus.imageUrl = this.state.imageUrl;
             }
-            console.log(campus);
             let web = window.location.href;
             web = web.substring(0, web.indexOf("/"));
             await this.props.editCampusThunk(campus);

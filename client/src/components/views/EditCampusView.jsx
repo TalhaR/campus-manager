@@ -28,12 +28,10 @@ const EditCampusView = (props) => {
     const [studentId, setStudentId] = useState(null);
 
     const handleChange = (e) => {
-        console.log(e.target.value);
         setStudentId(e.target.value);
     };
 
     const handleAddSubmit = (e) => {
-        console.log(e.target.value);
         e.preventDefault();
         if (studentId)
             axios
@@ -41,9 +39,6 @@ const EditCampusView = (props) => {
                     campusId: props.campus.id,
                 })
                 .then((e) => console.log(e));
-        //e.target.submit());
-
-        console.log(studentId);
     };
 
     return (

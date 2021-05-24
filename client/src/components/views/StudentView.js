@@ -18,12 +18,10 @@ const StudentView = ({ student, allCampuses, deleteStudent }) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value)
     setNewCampus(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    console.log(e.target.value)
     e.preventDefault();
     if (newCampus)
       axios
@@ -34,6 +32,9 @@ const StudentView = ({ student, allCampuses, deleteStudent }) => {
   const handleDelete = (id) => {
     deleteStudent(id)
 
+    let web = window.location.href;
+    web = web.substring(0, web.indexOf("/"));
+    window.location.href = web + "/students/";
   }
 
   return (
