@@ -26,19 +26,40 @@ const EditStudentView = (props) => {
     
         <form className={classes.root} noValidate autoComplete="off" onSubmit={props.handleSubmit}>
           <Grid container justify="center">
+            {
+            "firstName" in props.errors ?
+            <TextField error helperText={props.errors.firstName} id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+            :
             <TextField id="standard-basic" label="First Name" value={props.firstName} onInput={ e=>props.setFirstName(e.target.value)}/>
+            }
           </Grid>
   
           <Grid container justify="center">
+            {
+            "lastName" in props.errors ?
+            <TextField error helperText={props.errors.lastName} id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
+            :
             <TextField id="standard-basic" label="Last Name" value={props.lastName} onInput={ e=>props.setLastName(e.target.value)}/>
+            }
           </Grid>
 
           <Grid container justify="center">
+            {
+            "gpa" in props.errors ?
+            <TextField error helperText={props.errors.gpa} id="standard-basic" label="GPA" value={props.gpa} onInput={ e=>props.setGPA(e.target.value)}/>
+            :
             <TextField id="standard-basic" label="GPA" value={props.gpa} onInput={ e=>props.setGPA(e.target.value)}/>
+            }
           </Grid>
 
           <Grid container justify="center">
+            {
+            "imageUrl" in props.errors ?
+            <TextField error helperText={props.errors.imageUrl} id="standard-basic" label="Student URL" value={props.imageUrl} onInput={ e=>props.setimageUrl(e.target.value)}/>
+            :
             <TextField id="standard-basic" label="Student URL" value={props.imageUrl} onInput={ e=>props.setimageUrl(e.target.value)}/>
+            }
+
           </Grid>
   
           <Grid container justify="center">
@@ -60,7 +81,8 @@ const EditStudentView = (props) => {
     setFirstName: PropTypes.func.isRequired,
     setLastName: PropTypes.func.isRequired,
     setGPA: PropTypes.func.isRequired,
-    setimageUrl: PropTypes.func.isRequired
+    setimageUrl: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
   };
 
 export default EditStudentView
