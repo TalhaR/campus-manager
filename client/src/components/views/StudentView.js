@@ -46,6 +46,7 @@ const StudentView = ({ student, allCampuses }) => {
         <Grid item xs={6}>
           <Card>
             <Typography variant='h3' align='center'>{student.firstname} {student.lastname}</Typography>
+            <Typography variant='subtitle1' align='center'>{"Email: " + student.email}</Typography>
             <Typography variant='subtitle1' align='center'>{"GPA: " + student.gpa}</Typography>
             <Typography align='right'>
               <Button variant="contained" color="primary" component={Link} to={`/editstudent/${student.id}`}>
