@@ -26,19 +26,39 @@ const EditCampusView = (props) => {
   
       <form className={classes.root} noValidate autoComplete="off" onSubmit={props.handleSubmit}>
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Name" value={props.name} onInput={ e=>props.setName(e.target.value)}/>
+          {
+            "name" in props.errors ?
+            <TextField error helperText={props.errors.name} id="standard-basic" label="Campus Name" value={props.name} onInput={ e=>props.setName(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Name" value={props.name} onInput={ e=>props.setName(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus address" value={props.address} onInput={ e=>props.setAddress(e.target.value)}/>
+          {
+            "address" in props.errors ?
+            <TextField error helperText={props.errors.address} id="standard-basic" label="Campus Address" value={props.address} onInput={ e=>props.setAddress(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Address" value={props.address} onInput={ e=>props.setAddress(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Image URL" value={props.imageUrl} onInput={ e=>props.setImageUrl(e.target.value)}/>
+          {
+            "imageUrl" in props.errors ?
+            <TextField error helperText={props.errors.imageUrl} id="standard-basic" label="Campus Image URL" value={props.imageUrl} onInput={ e=>props.setImageUrl(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Image URL" value={props.imageUrl} onInput={ e=>props.setImageUrl(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
-          <TextField id="standard-basic" label="Campus Description" value={props.description} onInput={ e=>props.setDescription(e.target.value)}/>
+          {
+            "description" in props.errors ?
+            <TextField error helperText={props.errors.description} id="standard-basic" label="Campus Description" value={props.description} onInput={ e=>props.setDescription(e.target.value)}/>
+            :
+            <TextField id="standard-basic" label="Campus Description" value={props.description} onInput={ e=>props.setDescription(e.target.value)}/>
+          }
         </Grid>
 
         <Grid container justify="center">
