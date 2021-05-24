@@ -23,6 +23,7 @@ const CampusView = ({ campus }) => {
         <Grid item xs={8}>
           <Card>
             <Typography variant='h3' align='center'>{campus.name}</Typography>
+            <Typography variant='subtitle1' align='center'>{campus.address}</Typography>
             <Typography variant='subtitle1' align='center'>{campus.description}</Typography>
             <Typography align='right'>
               <Button variant="contained" color="primary" component={Link} to={`/editcampus/${campus.id}`}>
